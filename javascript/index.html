@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div class="container">
+        <form action="" id="form" onsubmit="validateForm()">
+          <h1> Register</h1>
+          <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username">
+            <div class="error" id="username-error"></div>
+          </div>
+      
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email">
+            <div class="error" id="email-error"></div>
+          </div>
+      
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <div class="error" id="password-error"></div>
+          </div>
+      
+          <div class="input-group">
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" id="cpassword" name="cpassword">
+            <div class="error" id="cpassword-error"></div>
+          </div>
+
+          <div class="input-group">
+            <label for="mobile">Mobile number</label>
+            <input type="number" id="mobile" name="mobile">
+            <div class="error" id="mobile-error"></div>
+          </div>
+
+          <div class="input-group">
+            <label for="address">Address</label> 
+            <textarea class="" id="address" name="address"></textarea>
+            <div class="error" id="address-error"></div>
+          </div>
+
+
+          <button type="submit">Register</button>
+        </form>
+      </div>
+      
+      <script>
+        function validateForm() {
+          event.preventDefault(); // Prevent form submission
+      
+          // Reset previous error messages
+          document.querySelectorAll('.error').forEach(error => error.textContent = '');
+      
+          // Get form values
+          const username = document.getElementById('username').value;
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          const cpassword = document.getElementById('cpassword').value;
+          const mobile = document.getElementById('mobile').value;
+          const address = document.getElementById('address').value;
+          // Validate username
+          if (username.trim() === '') {
+            document.getElementById('username-error').textContent = 'Username is required.';
+          }
+      
+          // Validate email
+          if (email.trim() === '') {
+            document.getElementById('email-error').textContent = 'Email is required.';
+          } else if (!isValidEmail(email)) {
+            document.getElementById('email-error').textContent = 'Invalid email format.';
+          }
+      
+          // Validate password
+          if (password.trim() === '') {
+            document.getElementById('password-error').textContent = 'Password is required.';
+          }
+      
+          // Validate confirm password
+          if (cpassword.trim() === '') {
+            document.getElementById('cpassword-error').textContent = 'Confirm password is required.';
+          } else if (cpassword !== password) {
+            document.getElementById('cpassword-error').textContent = 'Passwords do not match.';
+          }
+
+          if (mobile.trim() === '') {
+            document.getElementById('mobile-error').textContent = 'mobile number is required.';
+          }
+          if (address.trim() === '') {
+            document.getElementById('address-error').textContent = 'address  is required.';
+          }
+      
+      
+          // If all fields are valid, submit the form
+          if (username && email && password && cpassword && password === cpassword) {
+            document.getElementById('form').submit();
+          }
+        }
+      
+        // Email validation helper function
+        function isValidEmail(email) {
+          // Simple email validation regex
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
+        }
+                                                                                            
+        // Add event listeners to input fields
+        document.getElementById('username').addEventListener('blur', validateForm);
+        document.getElementById('email').addEventListener('blur', validateForm);
+        document.getElementById('password').addEventListener('blur', validateForm);
+        document.getElementById('cpassword').addEventListener('blur', validateForm);
+        document.getElementById('mobile').addEventListener('blur', validateForm);
+        document.getElementById('address').addEventListener('blur', validateForm);
+      </script>
+      
+</body>
+</html>
